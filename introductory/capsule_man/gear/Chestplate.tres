@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://wjkmps3ln1q6"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_jwvka"]
+
+[resource]
+script = ExtResource("1_jwvka")
+display_name = "Cool Chestplate"
+description = "Cool chestplate worn by cool people."
+types = Array[StringName]([&"Gear", &"Chestplate"])
+single = true
+metadata/_custom_type_script = "uid://c8ra2b0l7tav8"

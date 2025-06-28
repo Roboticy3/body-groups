@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg3l8bqmqiyrv"]
+
+[ext_resource type="Script" uid="uid://bro2v8uea1p0n" path="res://inventory/scripts/inventory_list_view.gd" id="1_rmgr6"]
+[ext_resource type="Script" uid="uid://cihgkev07qqbc" path="res://introductory/capsule_man/scripts/armor_notifier.gd" id="2_0nf6c"]
+
+[node name="Helmet" type="ItemList"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -204.0
+offset_bottom = -252.0
+grow_horizontal = 2
+grow_vertical = 2
+auto_width = true
+script = ExtResource("1_rmgr6")
+max_size = 1
+equip_group = "Equip"
+
+[node name="ArmorNotifier" type="Node" parent="."]
+script = ExtResource("2_0nf6c")
+
+[connection signal="inventory_item_added" from="." to="ArmorNotifier" method="equip"]
+[connection signal="inventory_item_removed" from="." to="ArmorNotifier" method="unequip"]

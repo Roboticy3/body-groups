@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2h1pe2xpqjtm"]
+
+[ext_resource type="Script" uid="uid://bro2v8uea1p0n" path="res://inventory/scripts/inventory_list_view.gd" id="1_xs1pf"]
+[ext_resource type="Script" uid="uid://dfiy2y2xmyal" path="res://advanced/body_groups/body_group_toggler.gd" id="3_y1utr"]
+
+[node name="ItemList" type="ItemList"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+allow_search = false
+auto_width = true
+script = ExtResource("1_xs1pf")
+max_size = 1
+
+[node name="BodyGroupEffector" type="Node" parent="."]
+script = ExtResource("3_y1utr")
+
+[connection signal="inventory_item_added" from="." to="BodyGroupEffector" method="set_item_visible"]
+[connection signal="inventory_item_removed" from="." to="BodyGroupEffector" method="set_item_invisible"]

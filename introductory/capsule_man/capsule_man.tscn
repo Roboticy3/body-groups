@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://d2rnutgiqrkoc"]
+
+[ext_resource type="Script" uid="uid://bcmugce5o47p4" path="res://introductory/capsule_man/scripts/capsule_man.gd" id="1_1y2rv"]
+[ext_resource type="Script" uid="uid://dsv1mbuune3rs" path="res://introductory/capsule_man/scripts/eyes.gd" id="2_bs48q"]
+[ext_resource type="Resource" uid="uid://xvohjwc5vccm" path="res://introductory/capsule_man/gear/starting_gear.tres" id="4_5j6s6"]
+[ext_resource type="Texture2D" uid="uid://dpfpjqnkv2p58" path="res://gear_layout.png" id="4_b5hoc"]
+[ext_resource type="Script" uid="uid://b1yyn2jxsrpx4" path="res://inventory/scripts/inventory_manager.gd" id="4_llk6m"]
+[ext_resource type="Script" uid="uid://bro2v8uea1p0n" path="res://inventory/scripts/inventory_list_view.gd" id="6_llk6m"]
+[ext_resource type="Script" uid="uid://eliylnfmj53e" path="res://introductory/capsule_man/scripts/armor_loader.gd" id="7_5j6s6"]
+[ext_resource type="PackedScene" uid="uid://bg3l8bqmqiyrv" path="res://inventory/equipment_slot_introductory.tscn" id="7_cp2sn"]
+[ext_resource type="PackedScene" uid="uid://1vn1scy8vsxg" path="res://introductory/capsule_man/Helmet.blend" id="8_5j6s6"]
+[ext_resource type="PackedScene" uid="uid://bv4eesvyxcnsk" path="res://introductory/capsule_man/Chestplate.blend" id="9_cp2sn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7qxck"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7qxck"]
+
+[node name="CapsuleMan" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_1y2rv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_7qxck")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_7qxck")
+
+[node name="Eyes" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+script = ExtResource("2_bs48q")
+
+[node name="Camera3D" type="Camera3D" parent="Eyes"]
+transform = Transform3D(1, -1.43934e-08, -3.8567e-09, 1.49012e-08, 0.965926, 0.258819, 0, -0.258819, 0.965926, 1.44889, 0.776457, 2.50955)
+
+[node name="Inventory" type="CanvasLayer" parent="."]
+
+[node name="Gear" type="ItemList" parent="Inventory"]
+modulate = Color(1, 1, 1, 0.505882)
+anchors_preset = -1
+anchor_left = 0.602
+anchor_top = 0.085
+anchor_right = 0.958
+anchor_bottom = 0.355
+offset_left = -0.504089
+offset_top = -0.0800018
+offset_right = 0.383911
+offset_bottom = -0.0400085
+grow_horizontal = 0
+script = ExtResource("6_llk6m")
+metadata/_tab_index = 0
+
+[node name="GearManager" type="Node" parent="Inventory/Gear"]
+script = ExtResource("4_llk6m")
+items = ExtResource("4_5j6s6")
+
+[node name="Equipped" type="Control" parent="Inventory"]
+layout_mode = 3
+anchor_left = 0.669
+anchor_top = 0.424
+anchor_right = 0.881
+anchor_bottom = 0.875
+offset_left = 0.311951
+offset_top = 0.247986
+offset_right = 0.0879517
+offset_bottom = -6.10352e-05
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GearLayout" type="TextureRect" parent="Inventory/Equipped"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_b5hoc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Helmet" parent="Inventory/Equipped" instance=ExtResource("7_cp2sn")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 16.0
+offset_top = 37.0
+offset_right = 59.0
+offset_bottom = 77.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Chestplate" parent="Inventory/Equipped" instance=ExtResource("7_cp2sn")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 11.0
+offset_top = 115.0
+offset_right = 54.0
+offset_bottom = 155.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="HelmetLoader" type="Node3D" parent="."]
+script = ExtResource("7_5j6s6")
+load_list = Array[PackedScene]([ExtResource("8_5j6s6")])
+
+[node name="ChestplateLoader" type="Node3D" parent="."]
+script = ExtResource("7_5j6s6")
+load_list = Array[PackedScene]([ExtResource("9_cp2sn")])
+
+[connection signal="item_added" from="Inventory/Gear/GearManager" to="Inventory/Gear" method="_on_add_item"]
+[connection signal="item_removed" from="Inventory/Gear/GearManager" to="Inventory/Gear" method="_on_remove_item"]

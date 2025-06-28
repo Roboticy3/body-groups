@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://xjiu2nscre41"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_ka8vh"]
+
+[resource]
+script = ExtResource("1_ka8vh")
+display_name = &"Green Hat"
+description = "A green hat that's been in your household for generations. Usually dawned at 18. You didn't wear it until you ran away from your job."
+types = Array[StringName]([&"Gear", &"Hat"])
+single = true
+metadata/_custom_type_script = "uid://c8ra2b0l7tav8"

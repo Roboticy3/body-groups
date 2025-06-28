@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://bn0kouhr25q1p"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_1rfj2"]
+
+[resource]
+script = ExtResource("1_1rfj2")
+display_name = &"Leather Coat"
+description = "An ancient brown leather coat that has always been with you. In the desert, it mostly gets draped over holes in tents. "
+types = Array[StringName]([&"Gear", &"Coat"])
+single = true
+metadata/_custom_type_script = "uid://c8ra2b0l7tav8"

@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bx6yhfek65krc"]
+
+[ext_resource type="PackedScene" uid="uid://eku20cmax04p" path="res://advanced/Accountant/accountant.tscn" id="1_yh3ds"]
+[ext_resource type="PackedScene" uid="uid://b0e003sv7pcyi" path="res://advanced/Spectator/spectator.tscn" id="2_hhu1w"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p0jhu"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_d437i"]
+sky_material = SubResource("ProceduralSkyMaterial_p0jhu")
+
+[sub_resource type="Environment" id="Environment_4uvp6"]
+background_mode = 2
+sky = SubResource("Sky_d437i")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4uvp6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Accountant" parent="." instance=ExtResource("1_yh3ds")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248535, 0)
+use_collision = true
+size = Vector3(10, 0.5, 10)
+
+[node name="Spectator" parent="." instance=ExtResource("2_hhu1w")]
+transform = Transform3D(0.614285, -0.320949, 0.720864, 0, 0.913545, 0.406737, -0.789084, -0.249852, 0.561177, 1.67045, 2.00839, 1.56988)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://c7psehgypp2a0"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_6m35a"]
+
+[resource]
+script = ExtResource("1_6m35a")
+display_name = &"Work Shoes"
+description = "Polishing these shoes has become something a tick. You don't have the proper kit for it, but just brushing them off keeps some of their old luster. You always took pride that your shoes were moderately shinier than your coworkers, and got the most annoyed when they trailed in mud."
+types = Array[StringName]([&"Shoes", &"Gear"])
+single = true
+metadata/_custom_type_script = "uid://c8ra2b0l7tav8"

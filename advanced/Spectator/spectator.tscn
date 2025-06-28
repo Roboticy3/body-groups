@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0e003sv7pcyi"]
+
+[ext_resource type="Script" uid="uid://c3i6yabpd7ouy" path="res://advanced/Spectator/spectator_controller.gd" id="1_d1gdt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ik72l"]
+
+[node name="Spectator" type="CharacterBody3D"]
+transform = Transform3D(0.614285, -0.320949, 0.720864, 0, 0.913545, 0.406737, -0.789084, -0.249852, 0.561177, 0, 0, 0)
+motion_mode = 1
+script = ExtResource("1_d1gdt")
+target_path = NodePath("../Accountant")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ik72l")
+
+[node name="Camera3D" type="Camera3D" parent="."]

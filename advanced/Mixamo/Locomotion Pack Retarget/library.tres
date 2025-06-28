@@ -1,0 +1,30 @@
+[gd_resource type="AnimationLibrary" load_steps=13 format=3 uid="uid://58k2cjukel6n"]
+
+[ext_resource type="Animation" uid="uid://mdqee3a4fkau" path="res://advanced/Mixamo/Locomotion Pack Retarget/idle.res" id="1_xhphi"]
+[ext_resource type="Animation" uid="uid://hpctolhn3bdf" path="res://advanced/Mixamo/Locomotion Pack Retarget/jump.res" id="2_4i332"]
+[ext_resource type="Animation" uid="uid://i7kx5k6knplp" path="res://advanced/Mixamo/Locomotion Pack Retarget/left strafe walking.res" id="3_t4ehd"]
+[ext_resource type="Animation" uid="uid://dhedg511en22t" path="res://advanced/Mixamo/Locomotion Pack Retarget/left strafe.res" id="4_d6g27"]
+[ext_resource type="Animation" uid="uid://d2sg0r3em3xg4" path="res://advanced/Mixamo/Locomotion Pack Retarget/left turn 90.res" id="5_cn6dl"]
+[ext_resource type="Animation" uid="uid://caj55vb2vloip" path="res://advanced/Mixamo/Locomotion Pack Retarget/left turn.res" id="6_mht68"]
+[ext_resource type="Animation" uid="uid://phtfiu1v20jd" path="res://advanced/Mixamo/Locomotion Pack Retarget/right strafe walking.res" id="7_23m52"]
+[ext_resource type="Animation" uid="uid://cc2naidci27kb" path="res://advanced/Mixamo/Locomotion Pack Retarget/right strafe.res" id="8_3jw3g"]
+[ext_resource type="Animation" uid="uid://06ao6yiwoyv" path="res://advanced/Mixamo/Locomotion Pack Retarget/right turn 90.res" id="9_8ul0v"]
+[ext_resource type="Animation" uid="uid://dbq1btxqq105" path="res://advanced/Mixamo/Locomotion Pack Retarget/right turn.res" id="10_ysmkl"]
+[ext_resource type="Animation" uid="uid://fuwoua7ejvax" path="res://advanced/Mixamo/Locomotion Pack Retarget/running.res" id="11_otq6o"]
+[ext_resource type="Animation" uid="uid://b1poym2dxcexh" path="res://advanced/Mixamo/Locomotion Pack Retarget/walking.res" id="12_rykga"]
+
+[resource]
+_data = {
+&"idle": ExtResource("1_xhphi"),
+&"jump": ExtResource("2_4i332"),
+&"left strafe": ExtResource("4_d6g27"),
+&"left strafe walking": ExtResource("3_t4ehd"),
+&"left turn": ExtResource("6_mht68"),
+&"left turn 90": ExtResource("5_cn6dl"),
+&"right strafe": ExtResource("8_3jw3g"),
+&"right strafe walking": ExtResource("7_23m52"),
+&"right turn": ExtResource("10_ysmkl"),
+&"right turn 90": ExtResource("9_8ul0v"),
+&"running": ExtResource("11_otq6o"),
+&"walking": ExtResource("12_rykga")
+}

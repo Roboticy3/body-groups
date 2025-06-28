@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://2qoe2pioiwu1"]
+
+[ext_resource type="Script" uid="uid://bro2v8uea1p0n" path="res://inventory/scripts/inventory_list_view.gd" id="1_lg80c"]
+[ext_resource type="Script" uid="uid://b1yyn2jxsrpx4" path="res://inventory/scripts/inventory_manager.gd" id="3_761kq"]
+[ext_resource type="Resource" uid="uid://c2o2ibt161bjc" path="res://advanced/Accountant/gear/starting_gear.tres" id="4_1r5y1"]
+
+[node name="Gear" type="ItemList"]
+modulate = Color(1, 1, 1, 0.505882)
+item_count = 2
+item_0/text = "bruh"
+item_1/text = "bruh"
+script = ExtResource("1_lg80c")
+metadata/_tab_index = 0
+
+[node name="GearManager" type="Node" parent="."]
+script = ExtResource("3_761kq")
+items = ExtResource("4_1r5y1")
+
+[connection signal="item_added" from="GearManager" to="." method="_on_add_item"]
+[connection signal="item_removed" from="GearManager" to="." method="_on_remove_item"]

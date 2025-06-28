@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://dax72nrilq6hc"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_uqc2c"]
+
+[resource]
+script = ExtResource("1_uqc2c")
+display_name = &"Safe Key"
+description = "The key to the safe in the back of your shop. Given to you by your friend Loro shortly after you arrived. You never asked where he got the safe, but there wasn't anything strange inside when you first got it. Looking at the safe, and by extension the key, makes you feel like everything is going to be alright."
+types = Array[StringName]([&"Keys"])
+single = true
+metadata/_custom_type_script = "uid://c8ra2b0l7tav8"

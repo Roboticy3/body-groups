@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="NodeGroupSet" load_steps=3 format=3 uid="uid://x3ovsxhf6eni"]
+
+[ext_resource type="Script" uid="uid://j0kx55r1pi6h" path="res://scripts/node_group/node_group.gd" id="1_3b2fm"]
+[ext_resource type="Script" uid="uid://be53exxhmpvpn" path="res://scripts/node_group/node_group_set.gd" id="2_nbd6c"]
+
+[resource]
+script = ExtResource("2_nbd6c")
+groups = Dictionary[StringName, ExtResource("1_3b2fm")]({})

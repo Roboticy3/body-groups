@@ -1,0 +1,191 @@
+[gd_scene load_steps=15 format=3 uid="uid://bx6yhfek65krc"]
+
+[ext_resource type="PackedScene" uid="uid://eku20cmax04p" path="res://Accountant/accountant.tscn" id="1_o8rtq"]
+[ext_resource type="PackedScene" uid="uid://b0e003sv7pcyi" path="res://Spectator/spectator.tscn" id="2_ik72l"]
+[ext_resource type="Script" uid="uid://b1yyn2jxsrpx4" path="res://scripts/inventory/inventory_manager.gd" id="3_4xge6"]
+[ext_resource type="Script" uid="uid://bro2v8uea1p0n" path="res://scripts/inventory/inventory_list_viewer.gd" id="3_p0jhu"]
+[ext_resource type="Resource" uid="uid://c2o2ibt161bjc" path="res://Accountant/gear/starting_gear.tres" id="4_4uvp6"]
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://scripts/inventory/inventory_item.gd" id="4_nc4a0"]
+[ext_resource type="Texture2D" uid="uid://dpfpjqnkv2p58" path="res://gear_layout.png" id="9_u2ugk"]
+[ext_resource type="Script" uid="uid://cyvvsh4nhg8d5" path="res://scripts/inventory/inventory_item_set.gd" id="10_4ck21"]
+[ext_resource type="PackedScene" uid="uid://m8jxx4msp2bh" path="res://cursor/cursor.tscn" id="10_icuwm"]
+[ext_resource type="Resource" uid="uid://dax72nrilq6hc" path="res://items/key.tres" id="10_khtk7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_p0jhu"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_d437i"]
+sky_material = SubResource("ProceduralSkyMaterial_p0jhu")
+
+[sub_resource type="Environment" id="Environment_4uvp6"]
+background_mode = 2
+sky = SubResource("Sky_d437i")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_7n640"]
+script = ExtResource("10_4ck21")
+load_list = Array[ExtResource("4_nc4a0")]([ExtResource("10_khtk7")])
+metadata/_custom_type_script = "uid://cyvvsh4nhg8d5"
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4uvp6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Accountant" parent="." instance=ExtResource("1_o8rtq")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.248535, 0)
+use_collision = true
+size = Vector3(10, 0.5, 10)
+
+[node name="Spectator" parent="." instance=ExtResource("2_ik72l")]
+transform = Transform3D(0.614285, -0.320949, 0.720864, 0, 0.913545, 0.406737, -0.789084, -0.249852, 0.561177, 1.67045, 2.00839, 1.56988)
+
+[node name="Inventory" type="CanvasLayer" parent="."]
+
+[node name="Items" type="Control" parent="Inventory"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -462.0
+offset_top = 60.0
+offset_right = -78.0
+offset_bottom = 271.0
+grow_horizontal = 0
+
+[node name="TabContainer" type="TabContainer" parent="Inventory/Items"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -51.0
+offset_right = 6.0
+offset_bottom = -51.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Gear" type="ItemList" parent="Inventory/Items/TabContainer"]
+layout_mode = 2
+item_count = 1
+script = ExtResource("3_p0jhu")
+metadata/_tab_index = 0
+
+[node name="GearManager" type="Node" parent="Inventory/Items/TabContainer/Gear"]
+script = ExtResource("3_4xge6")
+items = ExtResource("4_4uvp6")
+
+[node name="Keys" type="ItemList" parent="Inventory/Items/TabContainer"]
+visible = false
+layout_mode = 2
+item_count = 1
+script = ExtResource("3_p0jhu")
+metadata/_tab_index = 1
+
+[node name="KeyManager" type="Node" parent="Inventory/Items/TabContainer/Keys"]
+script = ExtResource("3_4xge6")
+items = SubResource("Resource_7n640")
+
+[node name="Gear" type="Control" parent="Inventory"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -384.0
+offset_top = -408.0
+offset_right = -148.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Hat" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+item_count = 1
+script = ExtResource("3_p0jhu")
+
+[node name="Tie" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 68.0
+offset_right = 45.0
+offset_bottom = 108.0
+script = ExtResource("3_p0jhu")
+
+[node name="Shirt" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 131.0
+offset_right = 41.0
+offset_bottom = 171.0
+script = ExtResource("3_p0jhu")
+
+[node name="Pants" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_left = 14.0
+offset_top = 272.0
+offset_right = 54.0
+offset_bottom = 312.0
+script = ExtResource("3_p0jhu")
+
+[node name="Gloves" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_left = 168.0
+offset_top = 74.0
+offset_right = 208.0
+offset_bottom = 114.0
+script = ExtResource("3_p0jhu")
+
+[node name="Shoes" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_left = 164.0
+offset_top = 320.0
+offset_right = 204.0
+offset_bottom = 360.0
+script = ExtResource("3_p0jhu")
+
+[node name="Coat" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_left = 170.0
+offset_top = 181.0
+offset_right = 210.0
+offset_bottom = 221.0
+script = ExtResource("3_p0jhu")
+
+[node name="Pack" type="ItemList" parent="Inventory/Gear"]
+layout_mode = 1
+offset_left = 161.0
+offset_top = -17.0
+offset_right = 201.0
+offset_bottom = 23.0
+script = ExtResource("3_p0jhu")
+
+[node name="GearLayout" type="TextureRect" parent="Inventory/Gear"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_u2ugk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cursor" parent="Inventory" instance=ExtResource("10_icuwm")]
+
+[connection signal="item_added" from="Inventory/Items/TabContainer/Gear/GearManager" to="Inventory/Items/TabContainer/Gear" method="_on_add_item"]
+[connection signal="item_removed" from="Inventory/Items/TabContainer/Gear/GearManager" to="Inventory/Items/TabContainer/Gear" method="_on_remove_item"]
+[connection signal="item_added" from="Inventory/Items/TabContainer/Keys/KeyManager" to="Inventory/Items/TabContainer/Keys" method="_on_add_item"]
+[connection signal="item_removed" from="Inventory/Items/TabContainer/Keys/KeyManager" to="Inventory/Items/TabContainer/Keys" method="_on_remove_item"]

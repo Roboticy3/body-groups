@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://bxe3ufqvr4kw6"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_ubbwo"]
+
+[resource]
+script = ExtResource("1_ubbwo")
+display_name = &"Borrowed Pants"
+description = "Your old pants ripped on brambles at a camp site some weeks ago. A hospitable farmer lent you these. They don't match the office shirt."
+types = Array[StringName]([&"Gear", &"Pants"])
+single = true
+metadata/_custom_type_script = "uid://c8ra2b0l7tav8"

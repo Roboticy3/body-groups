@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="InventoryItemSet" load_steps=11 format=3 uid="uid://c2o2ibt161bjc"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_ge52s"]
+[ext_resource type="Resource" uid="uid://xjiu2nscre41" path="res://advanced/Accountant/gear/GreenHat.tres" id="2_ndfs7"]
+[ext_resource type="Resource" uid="uid://bxe3ufqvr4kw6" path="res://advanced/Accountant/gear/WornPants.tres" id="3_tjcap"]
+[ext_resource type="Resource" uid="uid://c2wkcdfb18sbr" path="res://advanced/Accountant/gear/OfficeShirt.tres" id="4_xnek5"]
+[ext_resource type="Resource" uid="uid://c7psehgypp2a0" path="res://advanced/Accountant/gear/OfficeShoes.tres" id="5_ajulp"]
+[ext_resource type="Resource" uid="uid://j87r5508y7a4" path="res://advanced/Accountant/gear/OfficeTie.tres" id="6_wrh0g"]
+[ext_resource type="Resource" uid="uid://bn0kouhr25q1p" path="res://advanced/Accountant/gear/NiceCoat.tres" id="7_glxs7"]
+[ext_resource type="Script" uid="uid://cyvvsh4nhg8d5" path="res://inventory/scripts/inventory_item_set.gd" id="7_jtou3"]
+[ext_resource type="Resource" uid="uid://dax72nrilq6hc" path="res://items/key.tres" id="7_tjcap"]
+[ext_resource type="Resource" uid="uid://d1ys2r3i5v8d3" path="res://items/coin.tres" id="9_xnek5"]
+
+[resource]
+script = ExtResource("7_jtou3")
+items = Array[ExtResource("1_ge52s")]([ExtResource("2_ndfs7"), ExtResource("7_glxs7"), ExtResource("4_xnek5"), ExtResource("5_ajulp"), ExtResource("6_wrh0g"), ExtResource("3_tjcap"), ExtResource("7_tjcap"), ExtResource("9_xnek5"), ExtResource("9_xnek5"), ExtResource("9_xnek5")])
+metadata/_custom_type_script = "uid://cyvvsh4nhg8d5"
