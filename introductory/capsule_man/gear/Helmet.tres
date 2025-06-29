@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://b34jgpeve6qs4"]
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://b8k50mqkfguq"]
 
 [ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_p78mi"]
 
 [resource]
 script = ExtResource("1_p78mi")
 display_name = "Cool Helmet"
-description = "Cool helmet worn by cool people."
+description = "A cool helmet worn by cool people."
 types = Array[StringName]([&"Gear", &"Helmet"])
 single = true
 metadata/_custom_type_script = "uid://c8ra2b0l7tav8"

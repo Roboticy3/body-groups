@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItemSet" load_steps=5 format=3 uid="uid://ds5d0ihc6s1ui"]
+
+[ext_resource type="Script" uid="uid://c8ra2b0l7tav8" path="res://inventory/scripts/inventory_item.gd" id="1_puc64"]
+[ext_resource type="Resource" uid="uid://wjkmps3ln1q6" path="res://introductory/capsule_man/gear/Chestplate.tres" id="2_le2e4"]
+[ext_resource type="Script" uid="uid://cyvvsh4nhg8d5" path="res://inventory/scripts/inventory_item_set.gd" id="2_vcdpg"]
+[ext_resource type="Resource" uid="uid://b8k50mqkfguq" path="res://introductory/capsule_man/gear/Helmet.tres" id="3_lw84a"]
+
+[resource]
+script = ExtResource("2_vcdpg")
+items = Array[ExtResource("1_puc64")]([ExtResource("2_le2e4"), ExtResource("3_lw84a")])
+metadata/_custom_type_script = "uid://cyvvsh4nhg8d5"

@@ -2,11 +2,11 @@
 extends Node
 
 #To reference the same item list as this manager, copy this resource in the editor
-@export var items:InventoryItemSet = InventoryItemSet.new()
+@export var items:InventoryItemSet
 
 func _ready():
 	for i in items.items:
-		item_added.emit(i)
+		if i: item_added.emit(i)
 	
 signal item_added(item:InventoryItem)
 signal item_removed(item:InventoryItem)

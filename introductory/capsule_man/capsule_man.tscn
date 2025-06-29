@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bcmugce5o47p4" path="res://introductory/capsule_man/scripts/capsule_man.gd" id="1_1y2rv"]
 [ext_resource type="Script" uid="uid://dsv1mbuune3rs" path="res://introductory/capsule_man/scripts/eyes.gd" id="2_bs48q"]
-[ext_resource type="Resource" uid="uid://xvohjwc5vccm" path="res://introductory/capsule_man/gear/starting_gear.tres" id="4_5j6s6"]
 [ext_resource type="Texture2D" uid="uid://dpfpjqnkv2p58" path="res://gear_layout.png" id="4_b5hoc"]
 [ext_resource type="Script" uid="uid://b1yyn2jxsrpx4" path="res://inventory/scripts/inventory_manager.gd" id="4_llk6m"]
+[ext_resource type="Resource" uid="uid://ds5d0ihc6s1ui" path="res://introductory/capsule_man/gear/introductory_gear.tres" id="5_cp2sn"]
 [ext_resource type="Script" uid="uid://bro2v8uea1p0n" path="res://inventory/scripts/inventory_list_view.gd" id="6_llk6m"]
 [ext_resource type="Script" uid="uid://eliylnfmj53e" path="res://introductory/capsule_man/scripts/armor_loader.gd" id="7_5j6s6"]
 [ext_resource type="PackedScene" uid="uid://bg3l8bqmqiyrv" path="res://inventory/equipment_slot_introductory.tscn" id="7_cp2sn"]
@@ -53,7 +53,7 @@ metadata/_tab_index = 0
 
 [node name="GearManager" type="Node" parent="Inventory/Gear"]
 script = ExtResource("4_llk6m")
-items = ExtResource("4_5j6s6")
+items = ExtResource("5_cp2sn")
 
 [node name="Equipped" type="Control" parent="Inventory"]
 layout_mode = 3
