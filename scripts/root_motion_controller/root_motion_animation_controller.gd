@@ -1,34 +1,17 @@
-## Node3D controlling animations via signals based on input. Either directional
-## input or setting a target.
 
-extends Node3D
+extends Node
 
-@export var mode := Mode.FOLLOW
-enum Mode {
-	FOLLOW = 0,
-	STICK
-}
+@export var target_property := ""
 
-signal local_target_direction_changed(to:Vector2)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	match mode:
-		Mode.FOLLOW: update_follow()
-		Mode.STICK: update_stick(delta)
+signal direction_changed(property:StringName, to:Vector2)
 
 var interpolated_input := Vector2.ZERO
 const INTERPOLATION_SPEED := 5.0
 #emit local_target_direction_changed with the current input direction
-func update_stick(delta:float):
+func _process(delta:float):
 	interpolated_input = interpolated_input.move_toward(
 		Input.get_vector("m_left","m_right","m_down","m_up"),
 		delta * INTERPOLATION_SPEED
 	)
 	
-	local_target_direction_changed.emit(interpolated_input)
-
-#emit local_target_direction_changed with the best possible direction towards
-#	the current target.
-func update_follow():
-	pass
+	direction_changed.emit(target_property, interpolated_input)

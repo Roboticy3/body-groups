@@ -22,14 +22,13 @@ func add_node_to_group(n:Node, g:StringName) -> bool:
 		groups[g] = new_group
 		group = new_group
 		found = false
+
+	group.add_node(n)
 	
-	if !Engine.is_editor_hint(): 
-		group.add_node(n)
-		
-		if total.has(n):
-			total[n].append(g)
-		else:
-			total[n] = [g]
+	if total.has(n):
+		total[n].append(g)
+	else:
+		total[n] = [g]
 	return found
 
 func get_nodes_in_group(g:StringName) -> Array[Node]:

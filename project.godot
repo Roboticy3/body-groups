@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Body Groups Test"
-run/main_scene="uid://cag41l78vovxe"
+run/main_scene="uid://bx6yhfek65krc"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

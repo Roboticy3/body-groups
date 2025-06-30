@@ -14,23 +14,22 @@ enum BodyMode {
 	VISIBLE
 }
 
-var body_modes:Dictionary[StringName,BodyMode] = {}
+@export var body_modes:Dictionary[StringName,BodyMode] = {}
 
 # Initialize coverage with some default value for each node that holds the
 #	relation.
 func _ready() -> void:
 	
-	
-	#At first, all groups are visible
 	for g in body_groups.get_groups():
-		print(g, ": ", body_groups.get_nodes_in_group(g))
-		body_modes[g] = BodyMode.VISIBLE
+		if !body_modes.has(g): 
+			body_modes[g] = BodyMode.DISABLED
 	
-	#Then, show_group will resolve how these visibilities effect each other.
-	for g in body_groups.get_groups():
-		show_group(g)
+	for g in body_modes:
+		if body_modes[g] == BodyMode.VISIBLE:
+			for n in body_groups.get_nodes_in_group(g):
+				set_visibility_of(n, true)
 	
-	#Finally, connect a signal through the resource so other nodes with access
+	#Connect a signal through the resource so other nodes with access
 	#	can toggle groups
 	body_groups.set_group_visible.connect(set_group_visibility)
 
@@ -51,7 +50,6 @@ func show_group(g:StringName) -> void:
 	#	the only way it wouldn't be visible here is if it were covered.
 	#So, in both cases, the groups covered by n should be covered.
 	for h in get_groups_covered_by(g):
-		print("covering ", h)
 		body_modes[h] = BodyMode.COVERED
 		for n in body_groups.get_nodes_in_group(h):
 			set_visibility_of(n,false)
@@ -93,7 +91,7 @@ func update_visibility_for_nodes_in(g:StringName):
 		
 		#If any group of n is hidden, hide it
 		for h in body_groups.get_groups_of(n):
-			if body_modes[h] != BodyMode.VISIBLE:
+			if body_modes.get(h) != BodyMode.VISIBLE:
 				set_visibility_of(n,false)
 				#If this node is hidden, don't try to hide things underneath it.
 				break
