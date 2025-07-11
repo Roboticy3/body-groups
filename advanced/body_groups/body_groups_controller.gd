@@ -1,121 +1,70 @@
-## Establish a set of relations that showing group "A" will hide "-A", and
-## hiding "A" will show "-A". Then, apply these relations to all members of the
-## groups.
-
-## Covered and Visible groups will both cover groups that they hide.
-
 extends Node
 
 @export var body_groups:NodeGroupSet
 
-enum BodyMode {
-	DISABLED,
-	COVERED,
-	VISIBLE
-}
+@export var equipped:Dictionary[StringName,bool] = {}
 
-@export var body_modes:Dictionary[StringName,BodyMode] = {}
+func _ready():
+	body_groups.set_group_visible.connect(_on_set_group_visible)
 
-# Initialize coverage with some default value for each node that holds the
-#	relation.
-func _ready() -> void:
-	
-	for g in body_groups.get_groups():
-		if !body_modes.has(g): 
-			body_modes[g] = BodyMode.DISABLED
-	
-	for g in body_modes:
-		if body_modes[g] == BodyMode.VISIBLE:
-			for n in body_groups.get_nodes_in_group(g):
-				set_visibility_of(n, true)
-	
-	#Connect a signal through the resource so other nodes with access
-	#	can toggle groups
-	body_groups.set_group_visible.connect(set_group_visibility)
+func _on_set_group_visible(g:StringName, v:bool):
+	if v:
+		show_group(g)
+	else:
+		hide_group(g)
 
-func set_group_visibility(g:StringName, to:bool):
-	print("setting group ", g, " to visiblility ", to)
-	if to: show_group(g)
-	else: hide_group(g)
-
-func show_group(g:StringName) -> void:
-	if body_modes[g] == BodyMode.COVERED: return
+func show_group(g:StringName):
+	for n in body_groups.get_nodes_in_group(g):
+		n.set("visible", true)
+	equipped[g] = true
 	
-	body_modes[g] = BodyMode.VISIBLE
-	
-	update_visibility_for_nodes_in(g)
-	
-	#It might make sense intuitively to check if n in visible before 
-	#	covering what is below it. But, since we're trying to show n,
-	#	the only way it wouldn't be visible here is if it were covered.
-	#So, in both cases, the groups covered by n should be covered.
-	for h in get_groups_covered_by(g):
-		body_modes[h] = BodyMode.COVERED
-		for n in body_groups.get_nodes_in_group(h):
-			set_visibility_of(n,false)
+	resolve()
 
 func hide_group(g:StringName):
-	#If g was COVERED, do not uncover nodes it was covering.
-	#If g was not COVERED, uncover both g and any DISBALED groups covered by it, 
-	#	recursively.
-	var was_covered := body_modes[g] == BodyMode.COVERED
-	
-	#Selectively hide and reveal the nodes in this group depending on coverage
 	for n in body_groups.get_nodes_in_group(g):
-		set_visibility_of(n,false)
-
-	var uncovered := get_groups_covered_by(g)
-	if !was_covered: 
-		for h in uncovered:
-			body_modes[h] = BodyMode.VISIBLE
-		
-		#Actually show the nodes *after* showing all the groups, so that nodes
-		#	in multiple of the revealed groups will not have their visibility 
-		#	determined by their order in the tree.
-		for h in uncovered:
-			print("uncovering ", h)
-			update_visibility_for_nodes_in(h)
+		n.set("visible", false)
+	equipped[g] = false
 	
-	#Hide after getting covered groups. 
-	body_modes[g] = BodyMode.DISABLED
+	resolve()
 
-#Show a group without accounting for coverage or affecting `body_modes`.
-#Basically just computing the visibility of the group of nodes with the current
-#	set of body_modes.
-#If g is disabled or covered, this will hide all nodes. Nodes in hidden or 
-#	covered groups will be hidden.
-func update_visibility_for_nodes_in(g:StringName):
-	#Selectively hide and reveal the nodes in this group depending on coverage
-	for n in body_groups.get_nodes_in_group(g):
-		set_visibility_of(n,true)
+func resolve():
+	
+	#Show all nodes in equipped groups being covered by unequipped groups
+	for g in body_groups.get_groups():
+		var g_invisible := false if equipped.get(g) else true
 		
-		#If any group of n is hidden, hide it
-		for h in body_groups.get_groups_of(n):
-			if body_modes.get(h) != BodyMode.VISIBLE:
-				set_visibility_of(n,false)
-				#If this node is hidden, don't try to hide things underneath it.
-				break
+		if g_invisible:
+			for h in get_groups_covered_by(g):
+				for n in body_groups.get_nodes_in_group(h):
+					for i in body_groups.get_groups_of(n):
+						if equipped.get(i):
+							n.set("visible", true)
+							print("show ", n)
+	
+	#Hide all nodes in groups covered by equipped groups
+	for g in body_groups.get_groups():
+		var g_visible := true if equipped.get(g) else false
+		
+		if g_visible: 
+			for h in get_groups_covered_by(g):
+				for n in body_groups.get_nodes_in_group(h):
+					n.set("visible", false)
+					print("hide ", n)
 
-#Get the groups currently covered by g.
-# If g is covering hidden groups, it will search to the groups covered by the 
-# hidden groups as well.
 func get_groups_covered_by(g:StringName) -> Array[StringName]:
-	
 	var covered_groups:Array[StringName] = []
+	
+	#`i` iterates through all groups directly covered by `g`
 	for n in body_groups.get_nodes_in_group(g):
 		for h in body_groups.get_groups_of(n):
-			if body_modes[h] == BodyMode.DISABLED:
-				covered_groups.append_array(get_groups_covered_by(h))
-			else:
-				var i = get_covered_group(h)
-				if i: covered_groups.append(i)
+			var i = get_covered_group(h)
+			if !i: continue
+			covered_groups.append(i)
+			covered_groups.append_array(get_groups_covered_by(i))
 	
 	return covered_groups
 
-func set_visibility_of(n:Node, to:bool):
-	print("set visibility of ", n, " to ", to)
-	n.set("visible", to)
 
-func get_covered_group(of:StringName) -> Variant:
-	if of.begins_with("-"): return of.substr(1)
-	else: return null
+func get_covered_group(g:StringName):
+	if g.begins_with("-"): return g.substr(1)
+	return null
